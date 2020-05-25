@@ -10,15 +10,10 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
         }
-        stage('Deliver') {
+        stage('Deploy') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                sh 'java -jar /var/jenkins_home/workspace/maven-job/target/my-app-1.0-SNAPSHOT.jar'
             }
         }
     }
